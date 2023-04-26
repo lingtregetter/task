@@ -29,4 +29,9 @@ public class PetController {
     public void addPet(@RequestBody @Valid Pet pet) {
         petRepository.savePet(pet);
     }
+
+    @PutMapping("/api/pets/{id}")
+    public void editPet(@PathVariable Long id, @RequestBody @Valid Pet pet) {
+        petRepository.editPet(id, pet);
+    }
 }
