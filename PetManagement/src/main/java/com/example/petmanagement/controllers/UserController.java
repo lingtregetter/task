@@ -3,6 +3,7 @@ package com.example.petmanagement.controllers;
 import com.example.petmanagement.dtos.UserRequest;
 import com.example.petmanagement.dtos.UserResponse;
 import com.example.petmanagement.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class UserController {
      * @param userRequest - userRequest object for logging in
      * @return UserResponse object
      */
+    @Operation(summary = "User log in")
     @PostMapping("/login")
     public UserResponse login(@RequestBody @Valid UserRequest userRequest){
         return userService.findUser(userRequest.getUsername(), userRequest.getPassword());
