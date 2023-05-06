@@ -1,37 +1,59 @@
 package com.example.petmanagement.controllers;
 
-import com.example.petmanagement.domain.Pet;
-import com.example.petmanagement.repositories.PetRepository;
+import com.example.petmanagement.domain.PetColor;
+import com.example.petmanagement.domain.PetCountry;
+import com.example.petmanagement.domain.PetType;
+import com.example.petmanagement.dtos.PetEdit;
+import com.example.petmanagement.dtos.PetRequest;
+import com.example.petmanagement.dtos.PetResponse;
+import com.example.petmanagement.services.PetService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/pets")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PetController {
-    private PetRepository petRepository;
+    private PetService petService;
 
-    public PetController(PetRepository petRepository) {
-        this.petRepository = petRepository;
+    public PetController(PetService petService) {
+        this.petService = petService;
     }
 
-    @GetMapping("/api/pets")
-    public List<Pet> getPets() {
-        return petRepository.findAll();
+    @GetMapping("/{userId}")
+    public List<PetResponse> getUserPets(@PathVariable Long userId) {
+        return petService.findUserPets(userId);
     }
 
-    @GetMapping("/api/pets/{id}")
-    public List<Pet> getUserPets(@PathVariable Long id) {
-        return petRepository.findAllUserPets(id);
+    @GetMapping("/pet/{petId}")
+    public PetEdit getPet(@PathVariable Long petId){
+        return petService.findPetById(petId);
     }
 
-    @PostMapping("/api/pets")
-    public void addPet(@RequestBody @Valid Pet pet) {
-        petRepository.savePet(pet);
+    @PostMapping("")
+    public void addPet(@RequestBody @Valid PetRequest pet) {
+        petService.savePet(pet);
     }
 
-    @PutMapping("/api/pets/{id}")
-    public void editPet(@PathVariable Long id, @RequestBody @Valid Pet pet) {
-        petRepository.editPet(id, pet);
+    @PutMapping("/{id}")
+    public void editPet(@PathVariable Long id, @RequestBody @Valid PetEdit pet) {
+        petService.editPet(id, pet);
+    }
+
+    @GetMapping("/colors")
+    public List<PetColor> getAllColors() {
+        return petService.findAllPetColors();
+    }
+
+    @GetMapping("/countries")
+    public List<PetCountry> getAllCountries() {
+        return petService.findAllPetCountries();
+    }
+
+    @GetMapping("/types")
+    public List<PetType> getAllTypes() {
+        return petService.findAllPetTypes();
     }
 }
