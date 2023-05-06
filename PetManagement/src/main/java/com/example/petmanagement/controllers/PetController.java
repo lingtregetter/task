@@ -27,7 +27,7 @@ public class PetController {
 
     /**
      * Finds all user pets by user id from database
-     * @param userId
+     * @param userId - user id to find user pets from database
      * @return List of PetResponse objects
      */
     @GetMapping("/{userId}")
@@ -37,7 +37,7 @@ public class PetController {
 
     /**
      * Finds pet by pet id from database
-     * @param petId
+     * @param petId - pet id to find the right pet from database
      * @return PetEdit object
      */
     @GetMapping("/pet/{petId}")
@@ -47,7 +47,7 @@ public class PetController {
 
     /**
      * Adds pet to database
-     * @param pet
+     * @param pet - new pet object
      */
     @PostMapping("")
     public void addPet(@RequestBody @Valid PetRequest pet) {
@@ -56,8 +56,8 @@ public class PetController {
 
     /**
      * Edit's pet info in database
-     * @param id
-     * @param pet
+     * @param id - pet id to find the right pet from database
+     * @param pet - updated pet object
      */
     @PutMapping("/{id}")
     public void editPet(@PathVariable Long id, @RequestBody @Valid PetRequest pet) {

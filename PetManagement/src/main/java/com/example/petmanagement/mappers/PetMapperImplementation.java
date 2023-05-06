@@ -19,6 +19,13 @@ public class PetMapperImplementation implements PetMapper {
     private CountryRepository countryRepository;
     private UserAccountRepository userAccountRepository;
 
+    /**
+     * Constructor for class PetMapperImplementation
+     * @param typeRepository
+     * @param colorRepository
+     * @param countryRepository
+     * @param userAccountRepository
+     */
     public PetMapperImplementation(TypeRepository typeRepository, ColorRepository colorRepository,
                                    CountryRepository countryRepository, UserAccountRepository userAccountRepository) {
         this.typeRepository = typeRepository;
@@ -27,6 +34,11 @@ public class PetMapperImplementation implements PetMapper {
         this.userAccountRepository = userAccountRepository;
     }
 
+    /**
+     * Method to map pet object to pet response dto
+     * @param pet - pet to map
+     * @return PetResponse object
+     */
     @Override
     public PetResponse petToPetResponseDto(Pet pet) {
         PetResponse petResponse = new PetResponse();
@@ -40,6 +52,11 @@ public class PetMapperImplementation implements PetMapper {
         return petResponse;
     }
 
+    /**
+     * Method to map list of pet objects to list of pet response dtos
+     * @param pets - List of pet objects
+     * @return List of PetResponse objects
+     */
     @Override
     public List<PetResponse> petsToPetResponseDtos(List<Pet> pets) {
         List<PetResponse> petResponseList = new ArrayList<PetResponse>(pets.size());
@@ -50,6 +67,11 @@ public class PetMapperImplementation implements PetMapper {
         return petResponseList;
     }
 
+    /**
+     * Method to map pet request dto to pet object
+     * @param petRequest - petRequest to map
+     * @return - Pet object
+     */
     @Override
     public Pet petRequestToPetEntity(PetRequest petRequest) {
         Pet pet = new Pet();
@@ -63,6 +85,11 @@ public class PetMapperImplementation implements PetMapper {
         return pet;
     }
 
+    /**
+     * Method to map pet object to pet request dto
+     * @param pet - pet to map
+     * @return PetRequest object
+     */
     @Override
     public PetRequest petToPetRequestDto(Pet pet) {
         PetRequest petRequest = new PetRequest();

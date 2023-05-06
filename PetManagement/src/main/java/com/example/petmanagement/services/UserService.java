@@ -15,11 +15,23 @@ public class UserService {
     private UserAccountRepository userAccountRepository;
     private UserMapper userMapper;
 
+    /**
+     * Constructor for class UserService
+     * @param userAccountRepository
+     * @param userMapper
+     */
     public UserService(UserAccountRepository userAccountRepository, UserMapper userMapper) {
         this.userAccountRepository = userAccountRepository;
         this.userMapper = userMapper;
     }
 
+    /**
+     * Method to find user from database
+     * Maps User object to UserResponse dto
+     * @param username - username to find
+     * @param password - password to find
+     * @return UserResponse object
+     */
     public UserResponse findUser(String username, String password) {
         Optional<UserAccount> optionalUserAccount = userAccountRepository.findUserBy(username, password);
         if (optionalUserAccount.isPresent()) {
