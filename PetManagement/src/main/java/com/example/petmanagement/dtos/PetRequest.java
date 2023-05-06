@@ -7,7 +7,9 @@ import lombok.Data;
 
 @Data
 public class PetRequest {
+    @NotNull(message = "User is required!")
     private Long userId;
+
     @NotNull(message = "Name is required!")
     @NotEmpty(message = "Name field cannot be empty!")
     private String name;

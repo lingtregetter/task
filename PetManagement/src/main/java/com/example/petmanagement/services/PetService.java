@@ -1,7 +1,6 @@
 package com.example.petmanagement.services;
 
 import com.example.petmanagement.domain.*;
-import com.example.petmanagement.dtos.PetEdit;
 import com.example.petmanagement.dtos.PetRequest;
 import com.example.petmanagement.dtos.PetResponse;
 import com.example.petmanagement.exceptions.CustomNullPointerException;
@@ -37,9 +36,9 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    public PetEdit findPetById(Long petId){
+    public PetRequest findPetById(Long petId){
         Pet pet = petRepository.findPetById(petId);
-        return petMapper.petToPetEditDto(pet);
+        return petMapper.petToPetRequestDto(pet);
     }
 
     public List<PetResponse> findUserPets(Long userId) {
@@ -53,11 +52,11 @@ public class PetService {
         }
     }
 
-    public void editPet(Long petId, PetEdit petEdit) {
+    public void editPet(Long petId, PetRequest petRequest) {
         Optional<Pet> optionalPet = petRepository.findById(petId);
 
         if (optionalPet.isPresent()) {
-            Pet pet = petMapper.petEditToPetEntity(petEdit);
+            Pet pet = petMapper.petRequestToPetEntity(petRequest);
             petRepository.updatePet(petId, pet.getName(), pet.getCode(),
                     pet.getType(), pet.getFurColor(), pet.getCountryOfOrigin());
         } else {

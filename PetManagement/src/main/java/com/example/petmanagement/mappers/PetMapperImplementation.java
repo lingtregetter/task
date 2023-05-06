@@ -1,7 +1,6 @@
 package com.example.petmanagement.mappers;
 
 import com.example.petmanagement.domain.*;
-import com.example.petmanagement.dtos.PetEdit;
 import com.example.petmanagement.dtos.PetRequest;
 import com.example.petmanagement.dtos.PetResponse;
 import com.example.petmanagement.repositories.ColorRepository;
@@ -65,44 +64,31 @@ public class PetMapperImplementation implements PetMapper {
     }
 
     @Override
-    public Pet petEditToPetEntity(PetEdit petEdit) {
-        Pet pet = new Pet();
-        pet.setName(petEdit.getName());
-        pet.setCode(petEdit.getCode());
-        pet.setType(typeById(petEdit.getTypeId()));
-        pet.setFurColor(colorById(petEdit.getFurColorId()));
-        pet.setCountryOfOrigin(countryById(petEdit.getCountryOfOriginId()));
-        pet.setUserAccount(userById(petEdit.getUserId()));
+    public PetRequest petToPetRequestDto(Pet pet) {
+        PetRequest petRequest = new PetRequest();
+        petRequest.setUserId(pet.getUserAccount().getId());
+        petRequest.setName(pet.getName());
+        petRequest.setCode(pet.getCode());
+        petRequest.setTypeId(pet.getType().getId());
+        petRequest.setFurColorId(pet.getFurColor().getId());
+        petRequest.setCountryOfOriginId(pet.getCountryOfOrigin().getId());
 
-        return pet;
+        return petRequest;
     }
 
-    @Override
-    public PetEdit petToPetEditDto(Pet pet) {
-        PetEdit petEdit = new PetEdit();
-        petEdit.setUserId(pet.getUserAccount().getId());
-        petEdit.setName(pet.getName());
-        petEdit.setCode(pet.getCode());
-        petEdit.setTypeId(pet.getType().getId());
-        petEdit.setFurColorId(pet.getFurColor().getId());
-        petEdit.setCountryOfOriginId(pet.getCountryOfOrigin().getId());
-
-        return petEdit;
-    }
-
-    PetType typeById(Long id) {
+    private PetType typeById(Long id) {
         return typeRepository.findById(id).orElseThrow();
     }
 
-    PetColor colorById(Long id) {
+    private PetColor colorById(Long id) {
         return colorRepository.findById(id).orElseThrow();
     }
 
-    PetCountry countryById(Long id) {
+    private PetCountry countryById(Long id) {
         return countryRepository.findById(id).orElseThrow();
     }
 
-    UserAccount userById(Long id) {
+    private UserAccount userById(Long id) {
         return userAccountRepository.findById(id).orElseThrow();
     }
 }

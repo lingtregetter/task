@@ -1,7 +1,6 @@
 package com.example.petmanagement.mappers;
 
 import com.example.petmanagement.domain.Pet;
-import com.example.petmanagement.dtos.PetEdit;
 import com.example.petmanagement.dtos.PetRequest;
 import com.example.petmanagement.dtos.PetResponse;
 import org.mapstruct.Mapper;
@@ -16,7 +15,5 @@ public interface PetMapper {
 
     Pet petRequestToPetEntity(PetRequest petRequest);
 
-    Pet petEditToPetEntity(PetEdit petEdit);
-
-    PetEdit petToPetEditDto(Pet pet);
+    PetRequest petToPetRequestDto(Pet pet);
 }
