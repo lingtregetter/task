@@ -1,7 +1,9 @@
 # pet task API
 
 Java version: 17
+
 Spring Boot version: 3.0.6
+
 Gradle version: 7.6.1
 
 ## Front-end:
